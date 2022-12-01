@@ -1,27 +1,37 @@
+import re
+from os import environ
+
+id_pattern = re.compile(r'^.\d+$')
+def is_enabled(value, default):
+    if value.lower() in ["true", "yes", "1", "enable", "y"]:
+        return True
+    elif value.lower() in ["false", "no", "0", "disable", "n"]:
+        return False
+    else:
+        return default
+
 class script(object):
-    START_TXT = """<b>𝙷𝙴𝙻𝙾 {} 🥰🙋‍♀</b>
+    START_TXT = environ.get("START_TXT", '''<b>Hello {} 👋🏻 I Am <a href=https://t.me/{}>{}</a>. I will share you Movies 😁.</b>
     
-<b>Hey Sweetheart, My Name Is <a href=https://t.me/{}>{}</a>. I'm a Powerful Movie Auto-Filter Bot.</b>
-
-<b>You Can Use Me As An Auto-filter in Your Movie Group.... Its Easy To Use Me; Just Add Me To Your Group As Admin, Thats All, i will Provide Tons of Movies There..😍</b>"""
+<i>Just send me the movie name</i>''')
     HELP_TXT = """𝙷𝙴𝚈 {}
-    
-<b>○ PLEASE DONT SPAM ME...🤒</b>
-    
-𝙷𝙴𝚁𝙴 𝙸𝚂 𝚃𝙷𝙴 𝙷𝙴𝙻𝙿 𝙵𝙾𝚁 𝙼𝚈 𝙲𝙾𝙼𝙼𝙰𝙽𝙳𝚂."""
-    OWNER_TXT = """<b>✯ CREATOR: Hislordship</b>
-<b>✯ MOVIE CHANNEL: <a href=https://t.me/+R59lJd9RGV1iNzZk>Movie Collection</a></b>
-<b>✯ SERIES CHANNEL: <a href=https://t.me/+YqsbYu4L9NExNDI0>LordshipTV</a></b>
-<b>✯ CREDIT: Everyone in this journey</b>"""
-    SOURCE_TXT = """<b>NOTE:</b>
-<b>DEVELOPED BY:</b>
-- <a href=https://t.me/+R59lJd9RGV1iNzZk>MOVIE COLLECTION</a></b>"""
+𝙷𝙴𝚁𝙴 𝙸𝚂 𝙼𝚈 𝙷𝙴𝙻𝙿 𝙲𝙾𝙼𝙼𝙰𝙽𝙳𝚂."""
+    ABOUT_TXT = """<b><i>🤖 ᴍʏ ɴᴀᴍᴇ : <a href=https://t.me/vindieselmoviebot><b>VIN DIESEL</b></a>\n
+👨‍💻 ᴅᴇᴠᴇʟᴏᴘᴇʀ : <a href=https://t.me/Manlikerex><b>Manlikerex</b></a>\n
+📝 ʟᴀɴɢᴜᴀɢᴇ : ᴘʏʀᴏɢʀᴀᴍ\n
+📚 ꜰʀᴀᴍᴇᴡᴏʀᴋ : ᴘʏᴛʜᴏɴ 3\n
+📡 ʜᴏsᴛᴇᴅ ᴏɴ : VPS\n
+📢 ᴜᴘᴅᴀᴛᴇs ᴄʜᴀɴɴᴇʟ : <a href=https://t.me/Lordshiptv><b></b>ᴄʟɪᴄᴋ ʜᴇʀᴇ</a>\n
+🌟 ᴠᴇʀsɪᴏɴ : ᴠ 4.0\n</b></i>"""
+    SOURCE_TXT = """<b>𝐂𝐫𝐞𝐚𝐭𝐞 𝐎𝐧𝐞 𝐋𝐢𝐤𝐞 𝐓𝐡𝐢𝐬:</b>
+» <b>I will Create One Bot For You (Not for free)</b>
+» <b>Contact Me @Manlikerex</b>"""
     MANUELFILTER_TXT = """Help: <b>Filters</b>
-
-- Filter is the feature were users can set automated replies for a particular keyword and EvaMaria will respond whenever a keyword is found the message
+    
+- Filter is the feature were users can set automated replies for a particular keyword and Search Bot will respond whenever a keyword is found the message
 
 <b>NOTE:</b>
-1. eva maria should have admin privillage.
+1. Search Bot should have admin privillage.
 2. only admins can add filters in a chat.
 3. alert buttons have a limit of 64 characters.
 
@@ -32,15 +42,15 @@ class script(object):
 • /delall - <code>delete the whole filters in a chat (chat owner only)</code>"""
     BUTTON_TXT = """Help: <b>Buttons</b>
 
-- I Support both url and alert inline buttons.
+- Search Bot Supports both url and alert inline buttons.
 
 <b>NOTE:</b>
 1. Telegram will not allows you to send buttons without any content, so content is mandatory.
-2. Eva Maria supports buttons with any telegram media type.
+2. Search Bot supports buttons with any telegram media type.
 3. Buttons should be properly parsed as markdown format
 
 <b>URL buttons:</b>
-<code>[Button Text](buttonurl:https://t.me/EvaMariaBot)</code>
+<code>[Button Text](buttonurl:https://t.me/Manlikerex)</code>
 
 <b>Alert buttons:</b>
 <code>[Button Text](buttonalert:This is an alert message)</code>"""
@@ -65,9 +75,9 @@ class script(object):
 • /disconnect  - <code>disconnect from a chat</code>
 • /connections - <code>list all your connections</code>"""
     EXTRAMOD_TXT = """Help: <b>Extra Modules</b>
-
+   
 <b>NOTE:</b>
-these are the extra features of Eva Maria
+these are the extra features of Search Bot
 
 <b>Commands and Usage:</b>
 • /id - <code>get id of a specified user.</code>
@@ -96,12 +106,14 @@ This module only works for my admins
 ★ 𝚃𝙾𝚃𝙰𝙻 𝙲𝙷𝙰𝚃𝚂: <code>{}</code>
 ★ 𝚄𝚂𝙴𝙳 𝚂𝚃𝙾𝚁𝙰𝙶𝙴: <code>{}</code> 𝙼𝚒𝙱
 ★ 𝙵𝚁𝙴𝙴 𝚂𝚃𝙾𝚁𝙰𝙶𝙴: <code>{}</code> 𝙼𝚒𝙱"""
-    LOG_TEXT_G = """#NewGroup
-Group = {}(<code>{}</code>)
-Total Members = <code>{}</code>
-Added By - {}
+    LOG_TEXT_G = """#𝐍𝐞𝐰𝐆𝐫𝐨𝐮𝐩
+    
+<b>᚛› 𝐆𝐫𝐨𝐮𝐩 ⪼ {}(<code>{}</code>)</b>
+<b>᚛› 𝐓𝐨𝐭𝐚𝐥 𝐌𝐞𝐦𝐛𝐞𝐫𝐬 ⪼ <code>{}</code></b>
+<b>᚛› 𝐀𝐝𝐝𝐞𝐝 𝐁𝐲 ⪼ {}</b>
 """
-    LOG_TEXT_P = """#NewUser
-ID - <code>{}</code>
-Name - {}
+    LOG_TEXT_P = """#𝐍𝐞𝐰𝐔𝐬𝐞𝐫  
+    
+<b>᚛› 𝐈𝐃 - <code>{}</code></b>
+<b>᚛› 𝐍𝐚𝐦𝐞 - {}</b>
 """
