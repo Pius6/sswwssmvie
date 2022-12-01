@@ -413,7 +413,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
             InlineKeyboardButton('⚚ ΛᎠᎠ MΞ ϮԾ YԾUᏒ GᏒԾUᎮ ⚚', url=f'http://t.me/{temp.U_NAME}?startgroup=true')
             ],[
             InlineKeyboardButton('SΞΛᏒCH HΞᏒΞ 🔍', switch_inline_query_current_chat=''),
-            InlineKeyboardButton('UᎮDΛTΞS Channel🍿', url='https://t.me/LordshipMovies')
+            InlineKeyboardButton('UᎮDΛTΞS CHΛNNΞL🍿', url='https://t.me/LordshipMovies')
             ],[
             InlineKeyboardButton('SΞᏒIΞS BԾϮ 🎬', url='https://t.me/Lordship_series'),
             InlineKeyboardButton('ΛᎠULϮ BԾϮ 🔞', url='https://t.me/Adultship')
